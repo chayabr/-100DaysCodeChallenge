@@ -1,0 +1,27 @@
+package sample;
+
+public class DuplicteWordPrint {
+
+		public static void main(String[] args) {
+			String s="palle technologies pvt ltd";
+			boolean[] visited=new boolean[s.length()];
+			for(int i=0;i<s.length();i++) {
+				char curchar=s.charAt(i);
+				int cnt=1;
+				if(visited[i] || !(curchar>='a' && curchar<='z')){
+					continue;
+				}
+				for(int j=i+1;j<s.length();j++) {
+					if(s.charAt(j)==curchar) {
+						cnt++;
+						visited[j]=true;
+					}				
+				}
+				if(cnt>1)
+				System.out.println(curchar);
+			}
+			
+		}
+
+	}
+
