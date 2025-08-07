@@ -1,0 +1,27 @@
+package sample;
+
+public class SecondBiggest {
+
+		public static void main(String[] args) {
+			
+			int[] a= {11,5,8,4,9,12};
+			
+			int first=a[0];
+			int second=a[0];
+			
+			for(int num:a) {
+				if(num>first) {
+					second=first;
+					first=num;
+				}
+				else if(num>second && num!=first) {
+					second=num;
+				}
+			}
+
+			System.out.println("Second largest number is: "+second);
+		}
+
+	}
+
+
