@@ -1,0 +1,29 @@
+package com.vc;
+
+import java.util.Scanner;
+
+public class RIGHTROTATION {
+
+	    public static void main(String[] args) {
+	        Scanner sc = new Scanner(System.in);
+
+	        int[] arr = {1,2,3,4,5,6,7,8,9,10};
+	        System.out.print("Enter number of right rotations: ");
+	        int n = sc.nextInt();
+	        n = n % arr.length;
+
+	        for (int r = 0; r < n; r++) {
+	            int last = arr[arr.length - 1];
+	            for (int i = arr.length - 1; i > 0; i--) {
+	                arr[i] = arr[i - 1];
+	            }
+	            arr[0] = last;
+	        }
+
+	        System.out.print("After right rotation: ");
+	        for (int num : arr) {
+	            System.out.print(num + " ");
+	        }
+	        sc.close();
+	    }
+	}
