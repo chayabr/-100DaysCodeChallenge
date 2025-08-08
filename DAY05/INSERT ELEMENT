@@ -1,0 +1,34 @@
+package com.vc;
+
+import java.util.Scanner;
+
+public class INSERT {
+	    public static void main(String[] args) {
+	        Scanner sc = new Scanner(System.in);
+
+	        int[] arr = {1, 2, 3, 4, 5};
+	        int[] newArr = new int[arr.length + 1];
+
+	        System.out.print("Enter element to insert: ");
+	        int x = sc.nextInt();
+	        System.out.print("Enter index to insert at: ");
+	        int y = sc.nextInt();
+
+	        for (int i = 0; i < y; i++) {
+	            newArr[i] = arr[i];
+	        }
+	        newArr[y] = x;
+	        for (int i = y; i < arr.length; i++) {
+	            newArr[i + 1] = arr[i];
+	        }
+
+	        System.out.print("After insertion: ");
+	        for (int num : newArr) {
+	            System.out.print(num + " ");
+	        }
+	        sc.close();
+	    }
+	}
+
+
+
