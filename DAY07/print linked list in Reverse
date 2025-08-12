@@ -1,0 +1,70 @@
+package com.vc;
+
+public class DAY07 {
+
+    // Static inner class for Node
+    static class Node {
+        int val;
+        Node next;
+
+        public Node(int val) {
+            this.val = val;
+            this.next = null;
+        }
+    }
+
+    // Static inner class for Singly Linked List
+    static class SLL {
+        Node root;
+
+        public SLL() {
+            this.root = null;
+        }
+
+        public void addNode(int val) {
+            Node n = new Node(val);
+            if (this.root == null) {
+                this.root = n;
+                return;
+            }
+            Node temp = this.root;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = n;
+        }
+
+        public void printReverse(Node node) {
+            if (node == null) {
+                return;
+            }
+            printReverse(node.next);
+            System.out.print(node.val + "->");
+        }
+
+        public void display() {
+            Node temp = this.root;
+            while (temp != null) {
+                System.out.print(temp.val + "->");
+                temp = temp.next;
+            }
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        SLL list = new SLL();
+        list.addNode(2);
+        list.addNode(4);
+        list.addNode(6);
+        list.addNode(8);
+        list.addNode(10);
+        list.addNode(12);
+
+        System.out.println("Original list: ");
+        list.display();
+
+        System.out.println("\nReversed list: ");
+        list.printReverse(list.root);
+    }
+}
