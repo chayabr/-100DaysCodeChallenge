@@ -1,0 +1,101 @@
+package com.vc;
+
+public class DAY09 {
+
+	public class Day09 {
+
+	    // Node class
+	    static class Node {
+	        int val;
+	        Node next;
+
+	        public Node(int val) {
+	            this.val = val;
+	            this.next = null;
+	        }
+	    }
+
+	    // Singly Linked List class
+	    static class SLL {
+	        Node head;
+
+	        public SLL() {
+	            head = null;
+	        }
+
+	        // Add node at end
+	        public void addNode(int val) {
+	            Node newNode = new Node(val);
+	            if (head == null) {
+	                head = newNode;
+	                return;
+	            }
+	            Node temp = head;
+	            while (temp.next != null) {
+	                temp = temp.next;
+	            }
+	            temp.next = newNode;
+	        }
+
+	        // Delete n-th node from end using two pointers
+	        public void deleteNthFromEnd(int n) {
+	            Node dummy = new Node(0);
+	            dummy.next = head;
+	            Node fast = dummy;
+	            Node slow = dummy;
+
+	            // Move fast pointer n+1 steps ahead
+	            for (int i = 0; i <= n; i++) {
+	                if (fast != null) {
+	                    fast = fast.next;
+	                } else {
+	                    System.out.println("Position exceeds list length");
+	                    return;
+	                }
+	            }
+
+	            // Move both pointers until fast reaches the end
+	            while (fast != null) {
+	                fast = fast.next;
+	                slow = slow.next;
+	            }
+
+	            // Delete the node
+	            slow.next = slow.next.next;
+
+	            // Update head in case the first node was deleted
+	            head = dummy.next;
+	        }
+
+	        // Display list
+	        public void display() {
+	            Node temp = head;
+	            while (temp != null) {
+	                System.out.print(temp.val + " -> ");
+	                temp = temp.next;
+	            }
+	            System.out.println("null");
+	        }
+	    }
+
+	    public static void main(String[] args) {
+	        SLL list = new SLL();
+	        list.addNode(1);
+	        list.addNode(2);
+	        list.addNode(3);
+	        list.addNode(4);
+	        list.addNode(5);
+
+	        System.out.println("Original List:");
+	        list.display();
+
+	        int n = 2; // delete 2nd node from end
+	        list.deleteNthFromEnd(n);
+
+	        System.out.println("After deleting " + n + "-th node from end:");
+	        list.display();
+	    }
+	}
+
+
+}
