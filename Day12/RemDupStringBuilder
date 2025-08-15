@@ -1,0 +1,21 @@
+package com.vc;
+
+public class RemoveDuplicatesStringBuilder {
+	    public static void main(String[] args) {
+	        String str = "programming";
+	        StringBuilder sb = new StringBuilder();
+
+	        for (int i = 0; i < str.length(); i++) {
+	            char ch = str.charAt(i);
+	            if (sb.indexOf(String.valueOf(ch)) == -1) { // check if not present
+	                sb.append(ch);
+	            }
+	        }
+
+	        System.out.println("Original: " + str);
+	        System.out.println("Without Duplicates: " + sb.toString());
+	    }
+	}
+
+
+
