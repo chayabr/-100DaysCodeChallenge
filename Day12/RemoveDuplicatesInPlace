@@ -1,0 +1,27 @@
+package com.vc;
+
+public class RemoveDuplicatesInPlace {
+	    public static void main(String[] args) {
+	        String str = "programming";
+	        char[] arr = str.toCharArray();
+	        int i = 0; // slow pointer
+
+	        for (int j = 0; j < arr.length; j++) {
+	            boolean found = false;
+	            for (int k = 0; k < i; k++) {
+	                if (arr[k] == arr[j]) {
+	                    found = true;
+	                    break;
+	                }
+	            }
+	            if (!found) {
+	                arr[i] = arr[j];
+	                i++;
+	            }
+	        }
+
+	        String result = new String(arr, 0, i);
+	        System.out.println("Original: " + str);
+	        System.out.println("Without Duplicates: " + result);
+	    }
+	}
