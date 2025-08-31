@@ -1,0 +1,98 @@
+package com.vc;
+import java.util.*;
+
+
+public class ExpressionEvaluation {
+	
+
+	    // Method to return precedence of operators
+	    private static int precedence(char op) {
+	        if (op == '+' || op == '-') return 1;
+	        if (op == '*' || op == '/') return 2;
+	        return 0;
+	    }
+
+	    // Method to apply an operator on two operands
+	    private static int applyOp(int a, int b, char op) {
+	        switch (op) {
+	            case '+': return a + b;
+	            case '-': return a - b;
+	            case '*': return a * b;
+	            case '/': return a / b; // assume b != 0
+	        }
+	        return 0;
+	    }
+
+	    // Main evaluation function
+	    public static int evaluate(String expression) {
+	        Stack<Integer> values = new Stack<>();  // numbers
+	        Stack<Character> ops = new Stack<>();   // operators
+
+	        for (int i = 0; i < expression.length(); i++) {
+	            char ch = expression.charAt(i);
+
+	            // Skip spaces
+	            if (ch == ' ') continue;
+
+	            // If number, push it
+	            if (Character.isDigit(ch)) {
+	                int val = 0;
+	                while (i < expression.length() && Character.isDigit(expression.charAt(i))) {
+	                    val = val * 10 + (expression.charAt(i) - '0');
+	                    i++;
+	                }
+	                values.push(val);
+	                i--; // step back
+	            }
+
+	            // If opening bracket, push it
+	            else if (ch == '(') {
+	                ops.push(ch);
+	            }
+
+	            // If closing bracket, solve entire bracket
+	            else if (ch == ')') {
+	                while (ops.peek() != '(') {
+	                    int b = values.pop();
+	                    int a = values.pop();
+	                    char op = ops.pop();
+	                    values.push(applyOp(a, b, op));
+	                }
+	                ops.pop(); // remove '('
+	            }
+
+	            // Operator
+	            else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+	                while (!ops.isEmpty() && precedence(ops.peek()) >= precedence(ch)) {
+	                    int b = values.pop();
+	                    int a = values.pop();
+	                    char op = ops.pop();
+	                    values.push(applyOp(a, b, op));
+	                }
+	                ops.push(ch);
+	            }
+	        }
+
+	        // Entire expression processed, apply remaining ops
+	        while (!ops.isEmpty()) {
+	            int b = values.pop();
+	            int a = values.pop();
+	            char op = ops.pop();
+	            values.push(applyOp(a, b, op));
+	        }
+
+	        return values.pop();
+	    }
+
+	    // Example run
+	    public static void main(String[] args) {
+	        String exp1 = "3 + 5";
+	        String exp2 = "10 + 2 * 6";
+	        String exp3 = "100 * ( 2 + 12 ) / 14";
+
+	        System.out.println(exp1 + " = " + evaluate(exp1));
+	        System.out.println(exp2 + " = " + evaluate(exp2));
+	        System.out.println(exp3 + " = " + evaluate(exp3));
+	    }
+	}
+
